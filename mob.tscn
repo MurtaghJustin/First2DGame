@@ -58,7 +58,7 @@ metadata/_edit_group_ = true
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_fp7qb")
 animation = &"swim"
-frame_progress = 0.714571
+frame_progress = 0.625458
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

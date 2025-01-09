@@ -104,7 +104,7 @@ public partial class Player : Area2D
 		);
 	}
 
-	private void OnBodyEntered(NoiseTexture2D body)
+	private void OnBodyEntered(Node2D body)
 	{
 		Hide();
 		EmitSignal(SignalName.Hit);
