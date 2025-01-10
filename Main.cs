@@ -11,6 +11,7 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,14 +21,17 @@ public partial class Main : Node
 
 	public void GameOver()
 	{
-		GD.Print($"Game Over: {_score}");
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		GetNode<Hud>("HUD").ShowGameOver();
 	}
 
 	public void NewGame()
 	{
-		_score = 0;
+		var hud = GetNode<Hud>("HUD");
+		hud.UpdateScore(0);
+		hud.ShowMessage("Get Ready!");
+
 		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
@@ -44,6 +48,7 @@ public partial class Main : Node
 	public void OnScoreTimerTimeout()
 	{
 		_score++;
+		GetNode<Hud>("HUD").UpdateScore(_score);
 	}
 
 	public void OnMobTimerTimeout()
