@@ -24,19 +24,25 @@ public partial class Main : Node
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
 		GetNode<Hud>("HUD").ShowGameOver();
+		GetNode<AudioStreamPlayer2D>("Music").Stop();
+		GetNode<AudioStreamPlayer2D>("DeathSound").Play();
 	}
 
 	public void NewGame()
 	{
+		_score = 0;
 		var hud = GetNode<Hud>("HUD");
 		hud.UpdateScore(0);
 		hud.ShowMessage("Get Ready!");
+
+		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 
 		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 
 		GetNode<Timer>("StartTimer").Start();
+		GetNode<AudioStreamPlayer2D>("Music").Play();
 	}
 
 	public void OnStartTimerTimeout()
